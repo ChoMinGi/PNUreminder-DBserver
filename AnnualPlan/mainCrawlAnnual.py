@@ -12,6 +12,22 @@ def checkOldData(due,data):
     else:
         return 0
 
+def doStateCheck(context):
+    # 학부, 신입생, 타대생, 대학원, 휴.복학생
+    if "휴·복학" in context:
+        state = 5
+    elif "대학원" in context:
+        state = 4
+    elif "타대생" in context:
+        state = 3
+    elif "신입생" in context:
+        state = 2
+    elif "학부" in context:
+        state = 1
+    else:
+        state = 0
+    return state
+
 
 def crawlAnnualplan(driver):
 
@@ -32,6 +48,8 @@ def crawlAnnualplan(driver):
         oldCheck= data[2*i]
         if checkOldData(expirationDate,oldCheck):
             continue
-        res.append([oldCheck,data[2*i+1]])
+        stateCheck = data[2 * i + 1]
+        state = doStateCheck(stateCheck)
+        res.append([oldCheck,stateCheck,state])
 
     return res
