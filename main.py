@@ -8,6 +8,9 @@ from selenium.webdriver.support.select import Select
 
 from AmazonRDSManage.connectRDS import connectRDS
 from AnnualPlan.mainCrawlAnnual import crawlAnnualplan
+from AnnualPlan.importAnnualPlanDB import importAnnualPlan
+
+from NearRoom.importNearRoomDB import importNearRoom
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -32,42 +35,12 @@ def checkFirstElement():
 def main():
 
 
-    annualLists=crawlAnnualplan(driver)
 
-    connection = connectRDS()
+# For Building annualPlan
+    # annualLists=crawlAnnualplan(driver)
+    # importAnnualPlan(annualLists)
 
-    with connection:
-        with connection.cursor() as cursor:
-            # Create a new record
-            for annualList in annualLists:
-                dbAnnualPlan = "INSERT INTO `annualplan` (`date`, `context`, `state`) VALUES (%s, %s, %s)"
-                cursor.execute(dbAnnualPlan, (annualList[0], annualList[1], annualList[2]))
-
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
-        connection.commit()
-
-    # connection = connectRDS()
-
-    # with connection:
-    #     with connection.cursor() as cursor:
-    #         # Create a new record
-    #         sql = "INSERT INTO `buildings` (`numBuild`, `numRoom`) VALUES (%s, %s)"
-    #         cursor.execute(sql, ('Test#108', 'Test#8308'))
-    #
-    #     # connection is not autocommit by default. So you must commit to save
-    #     # your changes.
-    #     connection.commit()
-    #
-    #     with connection.cursor() as cursor:
-    #         # Read a single record
-    #         sql = "SELECT `numBuild`, `numRoom` FROM `buildings` WHERE `numBuild`=%s"
-    #         cursor.execute(sql, ('Test#108',))
-    #         result = cursor.fetchone()
-    #         print(result)
-
-
-    driver.quit()
+    importNearRoom()
 
     return
 
