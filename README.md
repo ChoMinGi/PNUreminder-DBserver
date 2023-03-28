@@ -1,6 +1,5 @@
 # PNUreminder-DBserver
-![image](https://user-images.githubusercontent.com/81455273/228175680-95e6cc32-8807-4ce4-953b-e59af9a287ba.png)
-
+![image](https://user-images.githubusercontent.com/81455273/228305162-2385b08f-b34f-434c-b0f8-ad2dad1854ed.png)
 
 ### Python , Selenium , MySQL
 
