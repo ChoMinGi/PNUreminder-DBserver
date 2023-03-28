@@ -28,24 +28,31 @@ def doStateCheck(context):
         state = 0
     return state
 
-
 def crawlAnnualplan(driver):
 
     expirationStdDay = 90
     expirationDate = datetime.today() - timedelta(expirationStdDay)
 
     lenHalf=0
-    # 웹 페이지 접속
+    # Get HTML
     driver.get('https://culedu.pusan.ac.kr/pnuSchdul/culedu/view.do')
     driver.implicitly_wait(3)
     titles = driver.find_elements(By.CLASS_NAME,"_artclTdTitle")
+
+
     data=[]
+    res=[]
+
     for title in titles:
         data.append(title.text)
+
+    driver.quit()
+
     lenHalf = len(data)//2
-    res=[]
+
     for i in range(lenHalf):
         oldCheck= data[2*i]
+
         if checkOldData(expirationDate,oldCheck):
             continue
         stateCheck = data[2 * i + 1]
