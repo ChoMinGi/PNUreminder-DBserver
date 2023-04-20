@@ -18,7 +18,7 @@ def import_building():
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                db_building = f"INSERT INTO building_loaction (`building_num`,`building_name`,`building_lat`, `building_lng`) VALUES (%s, %s, %s, %s)"
+                db_building = f"INSERT INTO building_location (`building_num`,`building_name`,`building_lat`, `building_lng`) VALUES (%s, %s, %s, %s)"
 
                 for i in read_data.index:
                     cursor.execute(db_building, (read_data['building_num'][i], read_data['building_name'][i],read_data['building_lat'][i], read_data['building_lng'][i]))
