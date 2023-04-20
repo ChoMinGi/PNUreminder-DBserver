@@ -11,6 +11,7 @@ from AnnualPlan.mainCrawlAnnual import crawlAnnualplan
 from AnnualPlan.importAnnualPlanDB import importAnnualPlan
 
 from NearRoom.importNearRoomDB import importNearRoom
+from NearRoom.importBuildingDB import import_building
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -34,13 +35,14 @@ def checkFirstElement():
 
 def main():
 
-
-
 # For Building annualPlan
-    # annualLists=crawlAnnualplan(driver)
-    # importAnnualPlan(annualLists)
+#     annualLists=crawlAnnualplan(driver)
+#
+#     importAnnualPlan(annualLists)
 
-    importNearRoom()
+    # importNearRoom()
+
+    import_building()
 
     return
 

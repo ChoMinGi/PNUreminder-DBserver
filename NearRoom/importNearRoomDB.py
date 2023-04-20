@@ -5,7 +5,7 @@ from AmazonRDSManage.connectRDS import connectRDS
 
 def importNearRoom():
 
-    dir_name = './2301table'
+    dir_name = './2301table/listLecture'
 
     file_list = os.listdir(dir_name)
     print(file_list)
