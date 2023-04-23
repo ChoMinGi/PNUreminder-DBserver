@@ -1,3 +1,4 @@
 /env
 .idea
-AmazonRDSManage/dbinfo.py
+amazon_rds/db_info.py
+*.pyc
