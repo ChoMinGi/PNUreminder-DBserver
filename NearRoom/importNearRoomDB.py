@@ -1,7 +1,7 @@
 import pandas
 import os
 
-from AmazonRDSManage.connectRDS import connectRDS
+from amazon_rds.rds_connection import connect_rds_pymysql
 
 def importNearRoom():
 
@@ -10,7 +10,7 @@ def importNearRoom():
     file_list = os.listdir(dir_name)
     print(file_list)
     for file_name in file_list:
-        connection = connectRDS()
+        connection = connect_rds_pymysql()
         readData = pandas.read_excel(dir_name + "/" + file_name)
         db_name = file_name.rstrip(".xlsx")
         print(f" >>{db_name}<< Auto Build COMPLETE")
