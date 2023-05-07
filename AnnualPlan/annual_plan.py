@@ -14,7 +14,8 @@ def annual_plan(annual_lists):
         __tablename__ = 'annualplan'
 
         id = Column(Integer, primary_key=True)
-        date = Column(String)
+        startDate = Column(String)
+        endDate = Column(String)
         context = Column(String)
         state = Column(Integer)
 
@@ -22,9 +23,10 @@ def annual_plan(annual_lists):
 
     for annual_list in annual_lists:
         new_plan = AnnualPlan(
-            date=annual_list[0],
-            context=annual_list[1],
-            state=annual_list[2]
+            startDate=annual_list[0],
+            endDate=annual_list[1],
+            context=annual_list[2],
+            state=annual_list[3]
         )
         # 객체를 세션에 추가하고 변경사항 커밋
         session.add(new_plan)

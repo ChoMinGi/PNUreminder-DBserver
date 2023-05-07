@@ -12,6 +12,12 @@ def checkOldData(due,data):
     else:
         return 0
 
+def split_date(whole_date):
+    start_end = []
+    start_end.append(whole_date[:10])
+    start_end.append(whole_date[13:])
+    return  start_end
+
 def doStateCheck(context):
     # 학부, 신입생, 타대생, 대학원, 휴.복학생
     if "휴·복학" in context:
@@ -57,6 +63,7 @@ def crawlAnnualplan(driver):
             continue
         stateCheck = data[2 * i + 1]
         state = doStateCheck(stateCheck)
-        res.append([oldCheck,stateCheck,state])
+        split_data = split_date(oldCheck)
+        res.append([split_data[0],split_data[1],stateCheck,state])
 
     return res
