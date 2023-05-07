@@ -47,7 +47,7 @@ def checkFirstElement():
     # db 앞 원소 비교후 바뀐 내용이 없으면 후처리 작동제한
     return
 
-def main():
+def set_orms():
     Base = declarative_base()
 
     class Building(Base):
@@ -58,14 +58,12 @@ def main():
         building_lat = Column(DECIMAL(20, 15), nullable=False)
         building_lng = Column(DECIMAL(20, 15), nullable=False)
 
-
     class LectureRoom(Base):
         __tablename__ = 'lecture_room'
 
-        id = Column(Integer, primary_key= True,autoincrement=True)
+        id = Column(Integer, primary_key=True, autoincrement=True)
         room_num = Column(String(40), nullable=False)
         building_num = Column(Integer, ForeignKey('building_location.building_num'))
-
 
     class Lecture(Base):
         __tablename__ = 'lecture'
@@ -76,9 +74,6 @@ def main():
         day_of_week = Column(Integer, nullable=False)
         lecture_room_id = Column(Integer, ForeignKey('lecture_room.id'))
 
-
-
-
     Building.lecture_rooms = relationship("LectureRoom", back_populates="building")
     LectureRoom.building = relationship("Building", back_populates="lecture_rooms")
 
@@ -86,19 +81,24 @@ def main():
     Lecture.lecture_room = relationship("LectureRoom", back_populates="lectures")
 
 
-    engine = create_rds_session(1)
-    Base.metadata.create_all(engine)
+    return
+def main():
+
+    # set_orms()
+
+    # engine = create_rds_session(1)
+    # Base.metadata.create_all(engine)
 
 
     # For Building annualPlan
-    #     annualLists=crawlAnnualplan(driver)
-    #     annual_plan(annualLists)
+    annualLists=crawlAnnualplan(driver)
+    annual_plan(annualLists)
 
-    building_location.main(Building)
+    # building_location.main(Building)
     # lecture_function.main(Lecture)
     # lecture_room_function.main(LectureRoom)
 
-    lecture_room_num.main(LectureRoom,Lecture)
+    # lecture_room_num.main(LectureRoom,Lecture)
 
 
 
