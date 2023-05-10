@@ -14,8 +14,8 @@ def annual_plan(annual_lists):
         __tablename__ = 'annualplan'
 
         id = Column(Integer, primary_key=True)
-        startDate = Column(String)
-        endDate = Column(String)
+        start_date = Column(String)
+        end_date = Column(String)
         context = Column(String)
         state = Column(Integer)
 
@@ -23,8 +23,8 @@ def annual_plan(annual_lists):
 
     for annual_list in annual_lists:
         new_plan = AnnualPlan(
-            startDate=annual_list[0],
-            endDate=annual_list[1],
+            start_date=annual_list[0],
+            end_date=annual_list[1],
             context=annual_list[2],
             state=annual_list[3]
         )
