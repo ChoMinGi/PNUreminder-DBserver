@@ -10,7 +10,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # 데이터베이스에 저장된 가장 최근 게시글의 제목을 가져오는 함수
-def get_latest_title_from_db(session):
+def get_latest_title_from_db(session, Announcement):
     result = session.query(Announcement).order_by(Announcement.id.desc()).first()
     if result:
         return result.title
@@ -23,7 +23,7 @@ def get_latest_title_from_web(driver):
     pass
 
 # 가장 오래된 게시글을 데이터베이스에서 삭제하는 함수
-def delete_oldest_announcement(session):
+def delete_oldest_announcement(session,Announcement):
     oldest_announcement = session.query(Announcement).order_by(Announcement.id).first()
     if oldest_announcement:
         session.delete(oldest_announcement)

@@ -12,6 +12,8 @@ def save_culedu_announce_to_rds(announcements):
         id = Column(Integer, primary_key=True, autoincrement=True)
         title = Column(String)
         urls = Column(String)
+        date = Column(String)
+        keyword = Column(String)
 
     session = create_rds_session_for_announcement()
     # Create RDS session
@@ -19,7 +21,9 @@ def save_culedu_announce_to_rds(announcements):
     for announce in announcements:
         new_announce = CuleduAnnounce(
             title=announce['title'],
-            urls=announce['urls']
+            urls=announce['urls'],
+            date=announce['date'],
+            keyword=announce['keyword']
         )
         session.add(new_announce)
 
