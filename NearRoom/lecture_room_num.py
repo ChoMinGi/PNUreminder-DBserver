@@ -3,8 +3,8 @@ import os
 
 from sqlalchemy.orm import relationship
 
-from amazon_rds.rds_connection import connect_rds_pymysql
-from amazon_rds.rds_connection import create_rds_session
+from aws.rds_connection import connect_rds_pymysql
+from aws.rds_connection import create_rds_session
 
 from sqlalchemy.ext.declarative import declarative_base
 

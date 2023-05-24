@@ -1,13 +1,13 @@
-from amazon_rds.rds_connection import create_rds_session_for_announcement
+from aws.rds_connection import create_rds_session_for_announcement
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import declarative_base
 
-def save_culedu_announce_to_rds(announcements):
+def save_culedu_announce_to_rds(datas, tablename):
     Base = declarative_base()
 
     class CuleduAnnounce(Base):
-        __tablename__ = 'culedu_announce'
+        __tablename__ = str(tablename)
 
         id = Column(Integer, primary_key=True, autoincrement=True)
         title = Column(String)
@@ -18,12 +18,12 @@ def save_culedu_announce_to_rds(announcements):
     session = create_rds_session_for_announcement()
     # Create RDS session
 
-    for announce in announcements:
+    for data in datas:
         new_announce = CuleduAnnounce(
-            title=announce['title'],
-            urls=announce['urls'],
-            date=announce['date'],
-            keyword=announce['keyword']
+            title=data['title'],
+            urls=data['urls'],
+            date=data['date'],
+            keyword=data['keyword']
         )
         session.add(new_announce)
 

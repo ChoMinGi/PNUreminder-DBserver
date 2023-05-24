@@ -1,7 +1,7 @@
 import pandas
 import os
 
-from amazon_rds.rds_connection import connect_rds_pymysql
+from aws.rds_connection import connect_rds_pymysql
 
 def importNearRoom():
 

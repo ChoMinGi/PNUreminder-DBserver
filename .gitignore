@@ -1,4 +1,4 @@
 /env
 .idea
-amazon_rds/db_info.py
+aws/db_info.py
 *.pyc

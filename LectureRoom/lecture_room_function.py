@@ -1,7 +1,7 @@
 import pandas
 import os
 
-from amazon_rds.rds_connection import create_rds_session
+from aws.rds_connection import create_rds_session
 
 
 def read_excel():

@@ -24,7 +24,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Time, DECIMAL, PrimaryKeyConstraint, \
     ForeignKeyConstraint
 
-from amazon_rds.rds_connection import create_rds_session
+from aws.rds_connection import create_rds_session
 
 
 chrome_options = webdriver.ChromeOptions()
