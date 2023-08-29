@@ -30,7 +30,7 @@ def crawl_major(driver, middle_url, major_url):
         data = []
         for row in non_headline_rows:
             title = row.find('td', {'class': "_artclTdTitle"}).find('strong').text
-            url = middle_url+row.find('a')['href']
+            url = major_url+middle_url+row.find('a')['href']
             date = row.find('td', {'class': '_artclTdRdate'}).get_text(strip=True)
 
             data.append({"title": title, "urls": url, "date": date})

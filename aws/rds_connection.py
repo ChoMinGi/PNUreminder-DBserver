@@ -4,7 +4,6 @@ import pymysql.cursors
 
 #RDS imformation
 from aws.db_info import dbsecurity
-from aws.db_info import dbsecurity_for_announcement
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker

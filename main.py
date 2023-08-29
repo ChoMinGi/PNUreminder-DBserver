@@ -89,8 +89,12 @@ def main():
     # engine = create_rds_session(1)
     # Base.metadata.create_all(engine)
 
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
-    # For Building annualPlan
     annualLists=crawlAnnualplan(driver)
     annual_plan(annualLists)
 
@@ -99,10 +103,6 @@ def main():
     # lecture_room_function.main(LectureRoom)
 
     # lecture_room_num.main(LectureRoom,Lecture)
-
-
-
-
     return
 
 main()

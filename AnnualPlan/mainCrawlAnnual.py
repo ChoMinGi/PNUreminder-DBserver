@@ -41,29 +41,27 @@ def crawlAnnualplan(driver):
 
     lenHalf=0
     # Get HTML
-    driver.get('https://culedu.pusan.ac.kr/pnuSchdul/culedu/view.do')
-    driver.implicitly_wait(3)
-    titles = driver.find_elements(By.CLASS_NAME,"_artclTdTitle")
+    # driver.get('https://culedu.pusan.ac.kr/pnuSchdul/culedu/view.do')
+    print("Web page loading...")
+    driver.get('https://www.pusan.ac.kr/kor/CMS/Haksailjung/view.do?mCode=MN076')
+    driver.implicitly_wait(5)
 
+    # th 태그의 텍스트를 추출
+    th_elements = driver.find_elements(By.CSS_SELECTOR, ".acacal-tbl th.term")
+    th_texts = [elem.text for elem in th_elements if elem.text.strip() != '']
 
-    data=[]
+    # td 태그의 텍스트를 추출
+    td_elements = driver.find_elements(By.CSS_SELECTOR, ".acacal-tbl td.text")
+    td_texts = [elem.text for elem in td_elements if elem.text.strip() != '']
     res=[]
-
-    for title in titles:
-        data.append(title.text)
 
     driver.quit()
 
-    lenHalf = len(data)//2
-
-    for i in range(lenHalf):
-        oldCheck= data[2*i]
-
-        if checkOldData(expirationDate,oldCheck):
+    for i in range(len(th_elements)):
+        if checkOldData(expirationDate,th_texts[i]):
             continue
-        stateCheck = data[2 * i + 1]
-        state = doStateCheck(stateCheck)
-        split_data = split_date(oldCheck)
-        res.append([split_data[0],split_data[1],stateCheck,state])
-
+        state = doStateCheck(td_texts[i])
+        split_data = split_date(th_texts[i])
+        res.append([split_data[0],split_data[1],td_texts[i],state])
+        print(res)
     return res

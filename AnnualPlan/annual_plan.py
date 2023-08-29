@@ -1,7 +1,8 @@
 from aws.rds_connection import create_rds_session
 from aws.rds_connection import connect_rds_pymysql
 
-from sqlalchemy import  Column, Integer, String
+from datetime import datetime
+from sqlalchemy import  Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -14,17 +15,20 @@ def annual_plan(annual_lists):
         __tablename__ = 'annualplan'
 
         id = Column(Integer, primary_key=True)
-        start_date = Column(String)
-        end_date = Column(String)
+        start_date = Column(DateTime)
+        end_date = Column(DateTime)
         context = Column(String)
         state = Column(Integer)
+
+    def convert_str_to_datetime(date_str):
+        return datetime.strptime(date_str, '%Y.%m.%d')
 
     session = create_rds_session()
 
     for annual_list in annual_lists:
         new_plan = AnnualPlan(
-            start_date=annual_list[0],
-            end_date=annual_list[1],
+            start_date=convert_str_to_datetime(annual_list[0]),
+            end_date=convert_str_to_datetime(annual_list[1]),
             context=annual_list[2],
             state=annual_list[3]
         )
